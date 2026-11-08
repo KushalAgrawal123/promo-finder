@@ -173,7 +173,7 @@ class LLM:
                 return self._clients[provider]
             key = self._key(pcfg)
             if not key:
-                raise LLMError(f"missing API key: set {pcfg.get('api_key_env')} in .env")
+                raise LLMError(f"missing API key: set {pcfg.get('api_key_env')} in .env (local) or in the app's Streamlit Secrets")
             if pcfg["type"] == "anthropic":
                 import anthropic
                 client = anthropic.Anthropic(api_key=key, max_retries=0, timeout=300)

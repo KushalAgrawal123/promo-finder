@@ -28,13 +28,17 @@ MAX_EPISODES = int(os.environ.get("PROMO_MAX_EPISODES", "60"))
 st.set_page_config(page_title="Promo Finder", page_icon="🎬", layout="wide")
 
 # Streamlit Cloud secrets -> env (never committed; set in the app's Secrets panel)
+SECRETS_ERROR = ""
 try:
     for k in ("GEMINI_API_KEY", "GROQ_API_KEY", "ANTHROPIC_API_KEY", "OPENAI_API_KEY", "OPENROUTER_API_KEY",
               "CUSTOM_LLM_BASE_URL", "CUSTOM_LLM_API_KEY"):
         if k in st.secrets and not os.environ.get(k):
-            os.environ[k] = st.secrets[k]
-except Exception:  # noqa: BLE001  (no secrets file locally)
-    pass
+            os.environ[k] = str(st.secrets[k]).strip()
+except Exception as e:  # noqa: BLE001
+    # "No secrets found" is normal when running locally with .env; anything else (e.g. a TOML parse
+    # error in the Streamlit Cloud Secrets box) must be shown, not swallowed.
+    if "No secrets found" not in str(e):
+        SECRETS_ERROR = str(e)
 
 cfg = load_config()
 st.title("🎬 Promo Finder")
@@ -59,7 +63,21 @@ with st.sidebar.expander("Models", expanded=mode == "Run on screenplays"):
     for env in ("GEMINI_API_KEY", "GROQ_API_KEY", "ANTHROPIC_API_KEY"):
         v = st.text_input(env, type="password", placeholder="set" if os.environ.get(env) else "")
         if v:
-            keys[env] = v
+            keys[env] = v.strip()
+
+
+def missing_keys(*model_refs: str) -> list[str]:
+    """API-key env vars needed by the chosen models that are not available."""
+    out = []
+    for ref in model_refs:
+        env = (cfg.get("providers", {}).get(ref.split("/", 1)[0], {}) or {}).get("api_key_env")
+        if env and not (keys.get(env) or os.environ.get(env)) and env not in out:
+            out.append(env)
+    return out
+
+
+if SECRETS_ERROR:
+    st.sidebar.error(f"Could not read the app's Secrets (check the TOML format): {SECRETS_ERROR}")
 
 with st.sidebar.expander("Ranking weights"):
     w = cfg["ranking"]["weights"]
@@ -196,7 +214,15 @@ if sum(1 for n in nums if lo <= n <= hi) > MAX_EPISODES:
     st.error(f"This deployment processes at most {MAX_EPISODES} episodes per run.")
     st.stop()
 
-if st.button("Find promos", type="primary"):
+need = missing_keys(gen)          # the generator key is required
+soft = [k for k in missing_keys(jud) if k not in need]   # judge falls back to the generator model
+if need:
+    st.warning("Missing API key: " + ", ".join(f"`{n}`" for n in need) + ". Paste it in the sidebar under "
+               "**Models**, or (app owner) add it in Streamlit Cloud → Manage app → Settings → Secrets as "
+               f"`{need[0]} = \"...\"`. To browse results without keys, use **View a saved run**.")
+elif soft:
+    st.caption(f"No `{soft[0]}` set: the judge will fall back to `{cfg['models'].get('judge_fallback')}`.")
+if st.button("Find promos", type="primary", disabled=bool(need)):
     bar = st.progress(0.0, "Starting…")
     logbox = st.empty()
     logs: list[str] = []
