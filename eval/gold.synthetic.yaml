@@ -1,0 +1,7 @@
+# Gold set format example (synthetic show). The real show's gold set is kept local
+# (eval/gold.yaml, gitignored) because it quotes confidential scripts.
+show: Synthetic Show
+reviewed: true
+moments:
+  - {id: G01, episode: 1, start: "00:09.20", end: "00:36.00", key: "00:15.60", what: "Fiance reveals he sold her late father's bakery to her rival"}
+  - {id: G02, episode: 2, start: "00:14.20", end: "00:35.00", key: "00:29.20", what: "Lawyer: the woman in the photo is your mother"}

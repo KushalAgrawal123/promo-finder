@@ -1,0 +1,17 @@
+# secrets
+.env
+.streamlit/secrets.toml
+# confidential input pack + anything quoting it
+Our Docs/
+data/
+outputs/
+scratch_runs/
+eval/gold.yaml
+*.zip
+# local
+.venv/
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store

@@ -1,0 +1,74 @@
+EPISODE NUMBER: Episode 1
+EPISODE LOGLINE: On her engagement night, baker Mira discovers her fiancé Dev has secretly sold her late father's bakery to her rival, Tara.
+CONTINUITY NOTES: Synthetic test episode written for the Promo Finder repo. Not real show content.
+
+--- SCRIPT START ---
+
+SCENE 01
+Scene heading: INT. MIRA'S BAKERY – NIGHT
+Scene start: 00:00.00
+Scene end: 00:40.00
+
+Actions and dialogue:
+
+**CAMERA:**
+Start: (00:00.00) | End: (00:04.00)
+Wide establishing shot of a small bakery strung with fairy lights and an engagement banner.
+
+**ACTION:**
+Start: (00:01.00) | End: (00:04.00)
+Mira arranges a tiered cake, smiling to herself.
+
+**MIRA (Warm, Excited):**
+Start: (00:04.50) | End: (00:06.50)
+"Everything is perfect tonight."
+
+**CAMERA:**
+Start: (00:06.50) | End: (00:09.00)
+The door bell jingles as Dev enters with Tara on his arm.
+
+**TARA (Smug):**
+Start: (00:09.20) | End: (00:11.80)
+"Not for you, sweetheart."
+
+**ACTION:**
+Start: (00:11.80) | End: (00:13.50)
+Tara slaps a signed deed onto the counter, knocking the cake topper over.
+
+**MIRA (Confused):**
+Start: (00:13.60) | End: (00:15.40)
+"Dev? What is this?"
+
+**DEV (Cold):**
+Start: (00:15.60) | End: (00:18.90)
+"I sold the bakery. Your father's bakery. To Tara."
+
+**MIRA (Shattered):**
+Start: (00:19.10) | End: (00:21.50)
+"You were going to marry me tomorrow."
+
+**DEV (Dismissive):**
+Start: (00:21.70) | End: (00:24.80)
+"I was going to marry the bakery. Now I don't need to."
+
+**CAMERA:**
+Start: (00:24.80) | End: (00:27.00)
+Close-up on Mira's trembling hands gripping the counter.
+
+**TARA (Gloating):**
+Start: (00:27.20) | End: (00:30.40)
+"You have until sunrise to get out."
+
+**ACTION:**
+Start: (00:30.40) | End: (00:33.00)
+Mira picks up the deed and notices her father's handwriting on the back.
+
+**MIRA (Whispering):**
+Start: (00:33.20) | End: (00:36.00)
+"Wait... this isn't his signature."
+
+**CAMERA:**
+Start: (00:36.00) | End: (00:40.00)
+Push-in on Dev's face as the colour drains from it. Cut to black.
+
+--- SCRIPT END ---

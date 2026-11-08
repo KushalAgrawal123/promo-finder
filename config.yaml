@@ -1,0 +1,81 @@
+# Promo Finder configuration. Swap models with one line, or override per run:
+#   python -m promo_finder run ... --model anthropic/claude-opus-5-5 --judge-model groq/openai/gpt-oss-120b
+# Env overrides also work: PROMO_GEN_MODEL, PROMO_JUDGE_MODEL.
+models:
+  generator: gemini/gemini-3.5-flash        # reads episodes, proposes promos, builds montages
+  generator_fallback: gemini/gemini-3.1-flash-lite   # only if the generator fails after retries (logged)
+  repair: gemini/gemini-3.1-flash-lite     # fixes candidates that break the rules (own free quota)
+  judge: groq/openai/gpt-oss-120b           # different model family; sees ONLY the clip text
+  judge_fallback: gemini/gemini-3.5-flash   # used if the judge provider fails / is rate-limited
+
+# provider -> how to reach it. "openai" type = any OpenAI-compatible endpoint.
+providers:
+  gemini:
+    type: openai
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+    api_key_env: GEMINI_API_KEY
+    rpm: 5
+  groq:
+    type: openai
+    base_url: https://api.groq.com/openai/v1
+    api_key_env: GROQ_API_KEY
+    rpm: 1              # free tier: 8,000 tokens/min PER MODEL; one ~6k-token call per minute
+  openrouter:
+    type: openai
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    rpm: 20
+  ollama:
+    type: openai
+    base_url: http://localhost:11434/v1
+    api_key_env: null
+    rpm: 1000
+  openai:
+    type: openai
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    rpm: 500
+  custom:                                   # e.g. an internal Kuku gateway
+    type: openai
+    base_url_env: CUSTOM_LLM_BASE_URL
+    api_key_env: CUSTOM_LLM_API_KEY
+    rpm: 60
+  anthropic:
+    type: anthropic                         # native Anthropic SDK
+    api_key_env: ANTHROPIC_API_KEY
+    effort: medium
+    rpm: 50
+
+pipeline:
+  candidates_per_episode: 3
+  episodes_per_call: 5        # free tier: Gemini allows ~20 requests/day/model -> batch episodes (1 = one call per episode)
+  montages: 8
+  judge_batch_size: 4
+  min_duration_s: 20
+  max_duration_s: 60
+  hook_window_s: 3.0
+  max_tail_extension_s: 2.0
+  dedupe_iou: 0.5
+  max_workers: 2                            # parallel episode calls (rate limiter still applies)
+  generator_temperature: 0.4
+  judge_temperature: 0.0
+
+ranking:
+  weights: {hook_3s: 0.30, cliffhanger: 0.25, standalone: 0.25, intensity: 0.20}
+  penalty_no_hook_in_3s: 1.0
+  penalty_repaired: 0.5
+  penalty_per_confusion: 0.5
+  max_confusion_penalty_items: 2
+  penalty_would_not_watch: 0.3
+  funnel_bonus: 0.5          # assumption: new viewers start at ep 1, early-episode promos pay off fastest
+  funnel_last_episode: 10
+  post_first_count: 10
+  max_per_arc_in_post_first: 2
+
+# USD per 1M tokens [input, output] — "list price equivalent" for the cost section.
+# Free tiers cost $0; these show what the same run costs on paid plans.
+# Claude prices from Anthropic's model table (cached 2026-10-06). Others: verify on provider pricing pages.
+pricing_per_million:
+  claude-opus-5-5: [4.00, 20.00]
+  claude-sonnet-5-5: [2.00, 10.00]
+  claude-haiku-5-5: [0.10, 0.50]
