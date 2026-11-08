@@ -1,0 +1,51 @@
+{
+  "run_id": "demo-default",
+  "show": "Synthetic Show (demo)",
+  "generator": "gemini/gemini-3.5-flash",
+  "judge": "groq/openai/gpt-oss-120b",
+  "generator_fallback": "gemini/gemini-3.1-flash-lite",
+  "episodes": 2,
+  "episode_range": [
+    1,
+    2
+  ],
+  "k": 3,
+  "created": "2026-11-08T17:22:29",
+  "wall_seconds": 37.9,
+  "llm_calls": 4,
+  "cached_calls": 0,
+  "input_tokens": 4431,
+  "output_tokens": 2208,
+  "by_model": {
+    "gemini/gemini-3.5-flash": {
+      "calls": 3,
+      "cached_calls": 0,
+      "input_tokens": 3163,
+      "output_tokens": 1261
+    },
+    "groq/openai/gpt-oss-120b": {
+      "calls": 1,
+      "cached_calls": 0,
+      "input_tokens": 1268,
+      "output_tokens": 947
+    }
+  },
+  "llm_failures": [],
+  "failed_episodes": [],
+  "list_price_cost_usd_if_all_tokens_on": {
+    "claude-opus-5-5": 0.0619,
+    "claude-sonnet-5-5": 0.0309,
+    "claude-haiku-5-5": 0.0015
+  },
+  "funnel": {
+    "episode_candidates": 2,
+    "montage_candidates": 1,
+    "candidates_total": 3,
+    "first_try_pass": 3,
+    "repaired_pass": 0
+  },
+  "final_promos": 2,
+  "rejected": 0,
+  "duplicates": 1,
+  "parse_warnings": []
+}

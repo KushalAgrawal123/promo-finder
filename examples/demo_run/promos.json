@@ -1,0 +1,200 @@
+{
+  "show": "Synthetic Show (demo)",
+  "meta": {
+    "run_id": "demo-default",
+    "show": "Synthetic Show (demo)",
+    "generator": "gemini/gemini-3.5-flash",
+    "judge": "groq/openai/gpt-oss-120b",
+    "generator_fallback": "gemini/gemini-3.1-flash-lite",
+    "episodes": 2,
+    "episode_range": [
+      1,
+      2
+    ],
+    "k": 3,
+    "created": "2026-11-08T17:22:29"
+  },
+  "promos": [
+    {
+      "id": "E02-P1",
+      "source": "episode",
+      "title": "The Forgery and The Dead Mother",
+      "seg_refs": [
+        {
+          "start_beat": "E02-B001",
+          "end_beat": "E02-B015"
+        }
+      ],
+      "hook_beat": "E02-B002",
+      "cliffhanger_beat": "E02-B014",
+      "hook": "Mira confronts Dev for forging her father's name on the legal deed.",
+      "cliffhanger": "A mysterious lawyer presents a photo revealing the real owner is Mira's supposedly dead mother.",
+      "why_it_works": "High physical aggression transitions directly into a game-changing family twist.",
+      "tropes": [
+        "forged signature",
+        "hidden truth",
+        "confrontation"
+      ],
+      "self_scores": {
+        "hook": 9,
+        "cliffhanger": 10,
+        "standalone": 9,
+        "intensity": 9
+      },
+      "origin_episode": 2,
+      "segments": [
+        {
+          "episode": 2,
+          "start": 0.0,
+          "end": 35.0,
+          "start_tc": "00:00.00",
+          "end_tc": "00:35.00",
+          "duration": 35.0,
+          "beat_ids": [
+            "E02-B001",
+            "E02-B002",
+            "E02-B003",
+            "E02-B004",
+            "E02-B005",
+            "E02-B006",
+            "E02-B007",
+            "E02-B008",
+            "E02-B009",
+            "E02-B010",
+            "E02-B011",
+            "E02-B012",
+            "E02-B013",
+            "E02-B014"
+          ]
+        }
+      ],
+      "total_duration": 35.0,
+      "checks": {
+        "ids_valid": true,
+        "trimmed_start_s": 0.0,
+        "trimmed_end_s": 3.0,
+        "hook_in_3s": true,
+        "duration_ok": true
+      },
+      "transcript": "[0:00.0] CAM: Medium shot of Mira holding the deed up to the light.\n[0:00.5] MIRA (Accusing): \"You forged my father's name.\"\n[0:03.7] DEV (Panicked): \"Keep your voice down!\"\n[0:05.5] ACTION: Dev grabs Mira's wrist; she twists free.\n[0:07.7] TARA (Sharp): \"Dev, you told me it was clean.\"\n[0:10.2] SFX: The door bell rings again.\n[0:11.5] CAM: A tall woman in a grey suit steps in out of the rain, holding a leather folder.\n[0:14.2] LAWYER (Calm): \"None of you can sell this bakery.\"\n[0:18.0] MIRA (Stunned): \"Who are you?\"\n[0:19.8] LAWYER (Measured): \"The lawyer for its real owner. And she's been waiting twenty years.\"\n[0:24.2] DEV (Afraid): \"Real owner?\"\n[0:26.0] CAM: Close-up on the lawyer opening the folder to reveal a faded photograph.\n[0:29.2] LAWYER (Quiet): \"Mira... the woman in this photo is your mother.\"\n[0:33.2] MIRA (Breathless): \"My mother is dead.\"",
+      "arc": "Confronting the Forgery",
+      "judge": {
+        "promo_id": "E02-P1",
+        "hook_3s": 6,
+        "cliffhanger": 7,
+        "standalone": 6,
+        "intensity": 7,
+        "confusions": [
+          "The exact relationship between Mira, Dev, and Tara is never explained.",
+          "Why does the lawyer claim the real owner has been waiting twenty years?",
+          "Mira's mother is said to be dead, yet the lawyer presents a photo of her."
+        ],
+        "would_keep_watching": true,
+        "verdict": "Intriguing family drama with a twist.",
+        "model": "groq/openai/gpt-oss-120b"
+      },
+      "score": 5.95,
+      "score_breakdown": {
+        "base": 6.45,
+        "scores_from": "judge",
+        "confusions": -1.0,
+        "funnel_bonus": 0.5
+      },
+      "why_post_first": "high emotional punch (7/10); brutal cliffhanger (7/10); from Ep 2 so new viewers hit the payoff early; tests the 'Confronting the Forgery' arc; trope: forged signature",
+      "rank": 1,
+      "post_first": true,
+      "episodes": [
+        2
+      ]
+    },
+    {
+      "id": "E01-P1",
+      "source": "episode",
+      "title": "The Engagement Night Betrayal",
+      "seg_refs": [
+        {
+          "start_beat": "E01-B004",
+          "end_beat": "E01-B015"
+        }
+      ],
+      "hook_beat": "E01-B005",
+      "cliffhanger_beat": "E01-B014",
+      "hook": "Tara enters with Mira's fiance Dev and snarls 'Not for you, sweetheart' before dumping a deed on the counter.",
+      "cliffhanger": "Mira notices the signature on the back of the deed is forged, causing Dev to panic.",
+      "why_it_works": "A brutal engagement night betrayal instantly turns into a crime reveal with massive stakes.",
+      "tropes": [
+        "betrayal",
+        "secret sale",
+        "forged signature"
+      ],
+      "self_scores": {
+        "hook": 9,
+        "cliffhanger": 9,
+        "standalone": 9,
+        "intensity": 9
+      },
+      "origin_episode": 1,
+      "segments": [
+        {
+          "episode": 1,
+          "start": 6.5,
+          "end": 36.0,
+          "start_tc": "00:06.50",
+          "end_tc": "00:36.00",
+          "duration": 29.5,
+          "beat_ids": [
+            "E01-B004",
+            "E01-B005",
+            "E01-B006",
+            "E01-B007",
+            "E01-B008",
+            "E01-B009",
+            "E01-B010",
+            "E01-B011",
+            "E01-B012",
+            "E01-B013",
+            "E01-B014"
+          ]
+        }
+      ],
+      "total_duration": 29.5,
+      "checks": {
+        "ids_valid": true,
+        "trimmed_start_s": 0.0,
+        "trimmed_end_s": 4.0,
+        "hook_in_3s": true,
+        "duration_ok": true
+      },
+      "transcript": "[0:00.0] CAM: The door bell jingles as Dev enters with Tara on his arm.\n[0:02.7] TARA (Smug): \"Not for you, sweetheart.\"\n[0:05.3] ACTION: Tara slaps a signed deed onto the counter, knocking the cake topper over.\n[0:07.1] MIRA (Confused): \"Dev? What is this?\"\n[0:09.1] DEV (Cold): \"I sold the bakery. Your father's bakery. To Tara.\"\n[0:12.6] MIRA (Shattered): \"You were going to marry me tomorrow.\"\n[0:15.2] DEV (Dismissive): \"I was going to marry the bakery. Now I don't need to.\"\n[0:18.3] CAM: Close-up on Mira's trembling hands gripping the counter.\n[0:20.7] TARA (Gloating): \"You have until sunrise to get out.\"\n[0:23.9] ACTION: Mira picks up the deed and notices her father's handwriting on the back.\n[0:26.7] MIRA (Whispering): \"Wait... this isn't his signature.\"",
+      "arc": "Engagement Betrayal",
+      "judge": {
+        "promo_id": "E01-P1",
+        "hook_3s": 5,
+        "cliffhanger": 8,
+        "standalone": 5,
+        "intensity": 8,
+        "confusions": [
+          "The nature of Dev and Mira's relationship (engaged?) is only hinted at.",
+          "Tara's role and why she is with Dev are unclear.",
+          "Dev's line about marrying the bakery is cryptic without context."
+        ],
+        "would_keep_watching": true,
+        "verdict": "Betrayal and a shady deed keep the tension high.",
+        "model": "groq/openai/gpt-oss-120b"
+      },
+      "score": 5.85,
+      "score_breakdown": {
+        "base": 6.35,
+        "scores_from": "judge",
+        "confusions": -1.0,
+        "funnel_bonus": 0.5
+      },
+      "why_post_first": "high emotional punch (8/10); brutal cliffhanger (8/10); from Ep 1 so new viewers hit the payoff early; tests the 'Engagement Betrayal' arc; trope: betrayal",
+      "rank": 2,
+      "post_first": true,
+      "episodes": [
+        1
+      ]
+    }
+  ]
+}

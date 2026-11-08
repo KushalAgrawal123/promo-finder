@@ -40,7 +40,7 @@ python -m promo_finder run --input path/to/show_folder --out ../outputs
 python -m promo_finder run --input examples/synthetic_show --out ../outputs --montages 1   # tiny demo show
 
 # UI (run mode + viewer mode for a saved promos.json)
-streamlit run app.py
+streamlit run app.py   # no files? tick "Use the built-in demo show", or open viewer mode (loads examples/demo_run/)
 
 # tests
 pytest -q
@@ -94,7 +94,7 @@ Start: (00:19.10) | End: (00:21.50)
 `CAMERA`, `ACTION` and `SOUND FX` blocks are recognised. Every other label is a speaker. Headers are case-insensitive. Malformed blocks become warnings, not crashes.
 
 ## Confidentiality
-The input pack (the show's screenplays) and any output quoting it are **not** in this repo (`.gitignore`). `examples/synthetic_show/` is a short fake show written for tests and demos.
+The input pack (the show's screenplays) and any output quoting it are **not** in this repo (`.gitignore`). `examples/synthetic_show/` is a short fake show written for tests and demos, and `examples/demo_run/` is the tool's real output on it (default models).
 
 ## Limits (honest)
 - It works from the screenplay, not the video. It can't see acting, pacing or how strong a visual really is, and final-cut timestamps may drift by about 1s from the script.

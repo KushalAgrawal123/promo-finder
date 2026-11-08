@@ -99,7 +99,8 @@ def main():
     gold = [m for m in g["moments"] if not eps or eps[0] <= m["episode"] <= eps[1]]
     if gold:
         ge = gold_eval(promos, gold)
-        L += [f"## Gold recall (gold set reviewed by human: {g.get('reviewed')})"]
+        L += [f"## Gold recall (timestamps verified against scripts: {g.get('verified_against_scripts', False)}; "
+              f"selection confirmed by a human editor: {g.get('human_reviewed', g.get('reviewed', False))})"]
         for key, (hit, tot, _) in ge.items():
             L.append(f"- {key}: **{hit}/{tot}** ({hit / tot:.0%})")
         found = ge[f"recall@all"][2]

@@ -85,7 +85,7 @@ def render_results(promos: list[dict], meta: dict, key_prefix: str):
         st.dataframe(pd.DataFrame([{"rank": p["rank"], "promo": p["title"], "segments": segs(p),
                                     "len (s)": round(p["total_duration"]), "score": p["score"],
                                     "why post first": p["why_post_first"]} for p in pf]),
-                     hide_index=True, use_container_width=True)
+                     hide_index=True, width="stretch")
 
     c1, c2, c3 = st.columns(3)
     only_pf = c1.checkbox("Only 'post first'", False, key=f"{key_prefix}_pf")
@@ -142,11 +142,14 @@ def render_results(promos: list[dict], meta: dict, key_prefix: str):
 if mode == "View a saved run (promos.json)":
     up = st.file_uploader("promos.json from a previous run", type=["json"])
     local = st.text_input("…or a path to promos.json on this machine (local use)", "")
+    demo = st.checkbox("Load the demo run instead (synthetic 2-episode show, no API calls)", value=not up and not local)
     data = None
     if up:
         data = json.load(up)
     elif local and Path(local).expanduser().is_file():
         data = json.loads(Path(local).expanduser().read_text())
+    elif demo:
+        data = json.loads((ROOT / "examples" / "demo_run" / "promos.json").read_text())
     if data:
         render_results(data["promos"], {**data.get("meta", {}), "show": data.get("show")}, "view")
     else:
@@ -156,8 +159,13 @@ if mode == "View a saved run (promos.json)":
 # ---------------- run mode ----------------
 files = st.file_uploader("Screenplay files — one .txt per episode, or a .zip", type=["txt", "zip"],
                          accept_multiple_files=True)
-title = st.text_input("Show title", "Uploaded show")
+use_demo = st.checkbox("No files? Use the built-in demo show (2 synthetic episodes in the same format)",
+                       value=False, disabled=bool(files))
+title = st.text_input("Show title", "Synthetic Show (demo)" if use_demo and not files else "Uploaded show")
 named: list[tuple[str, str]] = []
+if use_demo and not files:
+    for p in sorted((ROOT / "examples" / "synthetic_show").glob("*.txt")):
+        named.append((p.name, p.read_text(encoding="utf-8")))
 for f in files or []:
     if f.name.lower().endswith(".zip"):
         with zipfile.ZipFile(io.BytesIO(f.read())) as z:
@@ -168,7 +176,8 @@ for f in files or []:
         named.append((f.name, f.read().decode("utf-8", errors="replace")))
 
 if not named:
-    st.info("Upload screenplays to start. Try the sample in `examples/synthetic_show/` from the repo.")
+    st.info("Upload screenplays to start, or tick the demo-show box above. To browse finished results without "
+            "running anything, switch to **View a saved run** in the sidebar.")
     st.stop()
 
 show = parse_texts(named, title=title)
