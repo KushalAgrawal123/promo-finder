@@ -108,7 +108,10 @@ def render_results(promos: list[dict], meta: dict, key_prefix: str):
     c1, c2, c3 = st.columns(3)
     only_pf = c1.checkbox("Only 'post first'", False, key=f"{key_prefix}_pf")
     src = c2.selectbox("Source", ["all", "episode", "montage"], key=f"{key_prefix}_src")
-    n_show = c3.slider("Show top", 5, max(5, len(promos)), min(25, len(promos)), key=f"{key_prefix}_n")
+    if len(promos) > 5:
+        n_show = c3.slider("Show top", 5, len(promos), min(25, len(promos)), key=f"{key_prefix}_n")
+    else:  # a slider needs min < max; small runs just show everything
+        n_show = len(promos)
     shown = [p for p in promos if (not only_pf or p.get("post_first")) and (src == "all" or p["source"] == src)][:n_show]
 
     for p in shown:
@@ -209,7 +212,8 @@ nums = [e.number for e in show.episodes]
 c1, c2, c3 = st.columns(3)
 lo, hi = c1.select_slider("Episodes", options=nums, value=(nums[0], nums[-1])) if len(nums) > 1 else (nums[0], nums[0])
 k = c2.number_input("Max promos per episode", 1, 5, cfg["pipeline"]["candidates_per_episode"])
-montages = c3.number_input("Cross-episode montages", 0, 12, cfg["pipeline"]["montages"])
+montages = c3.number_input("Cross-episode montages", 0, 12,
+                           1 if (use_demo and not files) else cfg["pipeline"]["montages"])
 if sum(1 for n in nums if lo <= n <= hi) > MAX_EPISODES:
     st.error(f"This deployment processes at most {MAX_EPISODES} episodes per run.")
     st.stop()
