@@ -1,8 +1,8 @@
 openai>=1.40
-anthropic>=0.40
+anthropic>=2.6
 pydantic>=2.6
 pyyaml>=6.0
 python-dotenv>=1.0
-streamlit>=1.36
+streamlit>=1.50
 pandas>=2.0
 pytest>=8.0
